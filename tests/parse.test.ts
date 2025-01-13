@@ -1,5 +1,5 @@
 // tests/parser.test.ts
-import { TypeScriptParser } from '../src/engine/parser';
+import { TypeScriptParser } from '../src/engine/parser.ts';
 
 Deno.test("Test TypeScript Parser", () => {
   const tsCode = "let message: string = 'Hello, World!';";
