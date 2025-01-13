@@ -16,3 +16,5 @@ export class W18 {
     Executor.execute(machineCode);
   }
 }
+
+console.log("src/index.ts is run");
