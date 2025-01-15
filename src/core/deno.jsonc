@@ -1,0 +1,16 @@
+{
+    "tasks": {
+      "start": "deno run --allow-read index.ts"
+    },
+    "compilerOptions": {
+      "lib": ["dom", "esnext"]
+    },
+    "imports": {},
+    "nodeModulesDir": true,
+    "npm": {
+      "dependencies": {
+        "typescript": "^5.1.6"
+      }
+    }
+  }
+  
