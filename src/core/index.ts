@@ -1,16 +1,16 @@
-import { parseCode } from './parser.ts';
-import { compileCode } from './compiler.ts';
-import { executeCode } from './executor.ts';
+import { parseCode } from "./parser.ts";
+import { compileCode } from "./compiler.ts";
+import { executeCode } from "./executor.ts";
 
 export function executeTypeScript(code: string): void {
   console.log("Starting execution pipeline...");
-  const ast = parseCode(code);
-  const machineCode = compileCode(ast);
-  executeCode(machineCode);
+  const parsedCode = parseCode(code);
+  const compiledCode = compileCode(parsedCode);
+  executeCode(compiledCode);
   console.log("Execution complete.");
 }
 
-// Test execution
+// Example usage
 const tsCode = `
 let message: string = 'Hello, W18!';
 console.log(message);
