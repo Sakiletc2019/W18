@@ -1,6 +1,6 @@
-export function compileCode(ast: any): string {
-    console.log("Compiling AST into machine code...");
-    // Simulate machine code generation
-    return `Machine Code for: ${ast.code}`;
+export function compileCode(parsedCode: string): string {
+    console.log("Compiling code...");
+    // Simulate compiling parsed TypeScript into "machine code"
+    return `Compiled machine code for: ${parsedCode}`;
   }
   
