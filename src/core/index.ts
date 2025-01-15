@@ -17,3 +17,6 @@ console.log(message);
 `;
 
 executeTypeScript(tsCode);
+
+console.log( `parsecode: ${parseCode}`);
+console.log( `compileCode: ${compileCode}`)
