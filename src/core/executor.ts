@@ -1,5 +1,5 @@
-export function executeCode(machineCode: string): void {
+export function executeCode(compiledCode: string): void {
     console.log("Executing machine code...");
-    console.log(machineCode);
+    console.log(compiledCode);
   }
   
