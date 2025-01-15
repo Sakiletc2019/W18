@@ -2,11 +2,18 @@ import { parseCode } from "./parser.ts";
 import { compileCode } from "./compiler.ts";
 import { executeCode } from "./executor.ts";
 
-export function executeTypeScript(code: string): void {
+export async function executeTypeScript(code: string): Promise<void> {
   console.log("Starting execution pipeline...");
+
+  // Parse the TypeScript code (simulate parsing)
   const parsedCode = parseCode(code);
+
+  // Compile the parsed code (simulate compilation)
   const compiledCode = compileCode(parsedCode);
-  executeCode(compiledCode);
+
+  // Execute the machine code (dynamic execution)
+  await executeCode(code);
+
   console.log("Execution complete.");
 }
 
@@ -16,7 +23,5 @@ let message: string = 'Hello, W18!';
 console.log(message);
 `;
 
-executeTypeScript(tsCode);
-
-console.log( `parsecode: ${parseCode}`);
-console.log( `compileCode: ${compileCode}`)
+// Execute the TypeScript code
+await executeTypeScript(tsCode);
