@@ -1,7 +1,6 @@
 export function parseCode(code: string): string {
     console.log("Parsing TypeScript code...");
-    // This example assumes minimal parsing, as Deno does not provide a direct AST API
-    // Focus on simply verifying or analyzing the code as text
+    // This example still simulates parsing; can be expanded for AST analysis
     return `Parsed code: ${code}`;
   }
   

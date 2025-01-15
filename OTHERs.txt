@@ -1,0 +1,13 @@
+Explanation of Fix:
+Dynamic Execution:
+
+Deno allows you to dynamically import and execute TypeScript files. This approach effectively simulates how a TypeScript execution engine would work.
+Temporary File:
+
+A temporary file (temp.ts) is created for the code, which is dynamically imported and executed.
+Permissions:
+
+Deno requires specific permissions (--allow-read, --allow-write) to manage files and execute code.
+Error Handling:
+
+Included error handling for cases where the code has syntax errors or other runtime issues.
