@@ -19,9 +19,13 @@ export async function executeTypeScript(code: string): Promise<void> {
 
 // Example usage
 const tsCode = `
-let message: string = 'Hello, W18!';
-console.log(message);
-`;
+      // Example TypeScript code
+      let sum:number = 0;
+      for (let i:number = 0; i < 100; i++) {
+        sum += i;
+      }
+      console.log("Sum from 0 to 99:", sum);
+    `;
 
 // Execute the TypeScript code
 await executeTypeScript(tsCode);

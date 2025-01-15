@@ -4,3 +4,8 @@ export function compileCode(parsedCode: string): string {
     return `Compiled machine code for: ${parsedCode}`;
   }
   
+
+  //stand alone
+    if (import.meta.main){
+      console.log(compileCode("hello"));
+    }
