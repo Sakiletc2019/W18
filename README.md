@@ -17,7 +17,7 @@ To get started with the **W18 TypeScript Execution Engine**, clone the repositor
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/
+git clone https://github.com/Sakiletc2019/W18
 cd w18
 ```
 
