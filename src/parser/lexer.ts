@@ -12,13 +12,13 @@ export function tokenize(source: string): Token[]{
     const tokenPatterns: [RegExp, string][]=[
         [/^\s+/, "WHITESPACE"],                         // Matches whitespace (space,tab,newline)
         [/^let|const|var/, "KEYWORD"],                  // Matches keywords let, const, var
+        [/^string|number|boolean/,"TYPE"],              // Matches type keywords string, number, boolean
         [/^[a-zA-Z_][a-zA-Z0-9_]*/, "IDENTIFIER"],      // Matches Variable names (identifier)
         [/^:/,"COLON"],                                 // Matches colon character (:)
-        [/^string|number|boolean/,"TYPE"],              // Matches type keywords string, number, boolean
-        [/^=/,"ASSIGN"],                                // Matches assignment operator (=)                              
-        [/^"[^"]*"|'[^']*'/,"STRING"],                  // Matches single-quoted (') & doucle-quoted(") string literals
-        [/^\d+(\.\d+)?/,"NUMBER"],                      // Matches integer and floating-point number literals
-        [/^true|TRUE|false|FALSE/,"Boolean"],           // Matches boolean literals
+        [/^=/,"ASSIGN"],                                // Matches assignment operator (=)
+        [/^"[^"]*"|'[^']*'/,"Literal STRING"],                  // Matches single-quoted (') & double-quoted(") string literals
+        [/^\d+(\.\d+)?/,"LITERAL NUMBER"],                      // Matches integer and floating-point number literals
+        [/^true|TRUE|false|FALSE/,"LITERAL BOOLEAN"],           // Matches boolean literals true, false, TRUE, FALSE
         [/^;/,"SEMICOLON"],                             // Matches semicolon character (;)
     ];
 
