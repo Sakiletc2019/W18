@@ -69,3 +69,13 @@ export function parse(source:string):ASTNode[]{
     return ast;
 
 }
+
+//Stanalone test
+const source = `
+let x: string = 'hello';
+const PI: number = 3.14;
+`;
+if (import.meta.main){
+    console.log("Source Code: ", source);
+    console.log("Tokens: ", parse(source));
+};

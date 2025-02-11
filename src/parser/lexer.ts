@@ -61,3 +61,13 @@ export function tokenize(source: string): Token[]{
     }
     return tokens;
 }
+
+//Stanalone test
+const source = `
+let x: string = 'hello';
+const PI: number = 3.14;
+`;
+if (import.meta.main) {
+    console.log("Source Code: ", source);
+    console.log("Tokens: ", tokenize(source));
+};
