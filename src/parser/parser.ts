@@ -11,7 +11,7 @@ export function parse(source:string):ASTNode{
     };
 
     const [keyowrd, identifier,colon,dataType,assign, value] = tokens;
-    if (keyowrd.type !== "KEYWORD" || identifier.type !== "IDENTIFIER" || colon.type !== "COLON" || dataType.type !== "TYPE" || assign.type !== "ASSIGN"){
+    if (keyowrd.type !== "KEYWORD" || identifier.type !== "IDENTIFIER" || colon.type !== "COLON" || dataType.type !== "TYPE" || assign.type !== "ASSIGN" || (value.type !== "Literal STRING" && value.type !== "LITERAL NUMBER" && value.type !== "LITERAL BOOLEAN")){
         throw new Error("Syntax error in variable declaration");
     };
 
@@ -20,7 +20,7 @@ export function parse(source:string):ASTNode{
         kind: keyowrd.value as "let" | "const" | "var",
         id: identifier.value,
         datatype: dataType.value as "string" | "number" | "boolean",
-        value: value.value==="STRING"? value.value.slice(1,-1): parseFloat(value.value)
+        value: value.value //| value.value =="STRING"? value.value.slice(1,-1): parseFloat(value.value)
     };
 
     return node;
