@@ -12,7 +12,7 @@ export function parse(source:string):ASTNode{
 
     const [keyowrd, identifier,colon,dataType,assign, value] = tokens;
     if (keyowrd.type !== "KEYWORD" || identifier.type !== "IDENTIFIER" || colon.type !== "COLON" || dataType.type !== "TYPE" || assign.type !== "ASSIGN" || (value.type !== "Literal STRING" && value.type !== "LITERAL NUMBER" && value.type !== "LITERAL BOOLEAN")){
-        throw new Error("Syntax error in variable declaration");
+        throw Error("Syntax error in variable declaration");
     };
 
     const node:VariableDecarationNode={

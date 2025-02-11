@@ -7,10 +7,13 @@ export interface Token {
 // create a token array for store ideentified tokens
 export function tokenize(source: string): Token[]{
     const tokens: Token[]=[];
+    let currentLine : number = 1; //keep trackof line number
+    let currentColumn :number =1; //keep track column number
 
     // simple ragEx based approach for tokenizing the input string or source code
     const tokenPatterns: [RegExp, string][]=[
         [/^\s+/, "WHITESPACE"],                         // Matches whitespace (space,tab,newline)
+        [/^\n/, "NEWLINE"],                             // Matches newline character
         [/^let|const|var/, "KEYWORD"],                  // Matches keywords let, const, var
         [/^string|number|boolean/,"TYPE"],              // Matches type keywords string, number, boolean
         [/^[a-zA-Z_][a-zA-Z0-9_]*/, "IDENTIFIER"],      // Matches Variable names (identifier)
@@ -33,11 +36,19 @@ export function tokenize(source: string): Token[]{
             const matches = source.match(pattern);
             if (matches) {
                 tokenFound = true;  //if token found, set the flag to true                       
-                if (type !== "WHITESPACE") {
+                if (type !== "WHITESPACE" && type !== "NEWLINE") {
                     tokens.push({ type, value: matches[0] });
                 };
 
-                source = source.slice(matches[0].length);
+                //update line change
+                if (type === "NEWLINE"){
+                    currentLine++;
+                    currentColumn = 1 ;
+                } else {
+                    currentColumn += matches[0].length;
+                }
+
+                source = source.slice(matches[0].length); //remove match token from source
                 matched = true;
                 break;  //stop checking other patterns once they found 
             }
