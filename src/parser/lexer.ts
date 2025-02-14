@@ -7,38 +7,60 @@ export interface Token {
 // create a token array for store ideentified tokens
 export function tokenize(source: string): Token[]{
     const tokens: Token[]=[];
+<<<<<<< HEAD
     let currentLine : number = 1; //keep trackof line number
     let currentColumn :number =1; //keep track column number
+=======
+    let currentLine: number = 1; //variable to keep track of the current line number
+    let currentColumn: number = 1; //variable to keep track of the current column number
+>>>>>>> 2a827e59e9fb421c52d2c154308349a9d2b0a7e8
 
     // simple ragEx based approach for tokenizing the input string or source code
     const tokenPatterns: [RegExp, string][]=[
         [/^\s+/, "WHITESPACE"],                         // Matches whitespace (space,tab,newline)
         [/^\n/, "NEWLINE"],                             // Matches newline character
+<<<<<<< HEAD
         [/^let|const|var/, "KEYWORD"],                  // Matches keywords let, const, var
         [/^string|number|boolean/,"TYPE"],              // Matches type keywords string, number, boolean
+=======
+        [/^\/\/.*/, "COMMENT"],                         // Matches single line comments
+        [/^\/\*[\s\S]*?\*\//, "MULTILINE_COMMENT"],               // Matches multi-line comments
+        [/^(let|const|var)\b/, "KEYWORD"],                  // Matches keywords let, const, var
+        [/^(string|number|boolean)\b/,"TYPE"],              // Matches type keywords string, number, boolean
+>>>>>>> 2a827e59e9fb421c52d2c154308349a9d2b0a7e8
         [/^[a-zA-Z_][a-zA-Z0-9_]*/, "IDENTIFIER"],      // Matches Variable names (identifier)
         [/^:/,"COLON"],                                 // Matches colon character (:)
         [/^=/,"ASSIGN"],                                // Matches assignment operator (=)
-        [/^"[^"]*"|'[^']*'/,"Literal STRING"],                  // Matches single-quoted (') & double-quoted(") string literals
-        [/^\d+(\.\d+)?/,"LITERAL NUMBER"],                      // Matches integer and floating-point number literals
-        [/^true|TRUE|false|FALSE/,"LITERAL BOOLEAN"],           // Matches boolean literals true, false, TRUE, FALSE
+        [/^"([^"\\]\\.)*"|'([^'\\]|\\.)*'/,"Literal_STRING"],                  // Matches single-quoted (') & double-quoted(") string literals
+        [/^\d+(\.\d+)?/,"LITERAL_NUMBER"],                      // Matches integer and floating-point number literals
+        [/^true|TRUE|false|FALSE/,"LITERAL_BOOLEAN"],           // Matches boolean literals true, false, TRUE, FALSE
         [/^;/,"SEMICOLON"],                             // Matches semicolon character (;)
     ];
 
     //loop the source code untill all the characters are tokenized
     while(source.length>0){
-        let tokenFound = false; //flag to check if a token is found
         let matched = false; // define matched variable
 
         //try to match each token to the token list
-        for (let i = 0; i < tokenPatterns.length; i++) {
-            const [pattern, type] = tokenPatterns[i];
-            const matches = source.match(pattern);
+        for (const [regex, type] of tokenPatterns) {
+            const matches = source.match(regex);
             if (matches) {
+<<<<<<< HEAD
                 tokenFound = true;  //if token found, set the flag to true                       
                 if (type !== "WHITESPACE" && type !== "NEWLINE") {
+=======
+                if (type !== "WHITESPACE" && type !== "NEWLINE" && type !== "COMMENT") {
+>>>>>>> 2a827e59e9fb421c52d2c154308349a9d2b0a7e8
                     tokens.push({ type, value: matches[0] });
-                };
+                }
+
+                //trace newline
+                if (type === "NEWLINE") {
+                    currentLine++;
+                    currentColumn = 1;
+                } else {
+                    currentColumn += matches[0].length;
+                }
 
                 //update line change
                 if (type === "NEWLINE"){
@@ -54,10 +76,21 @@ export function tokenize(source: string): Token[]{
             }
         }
 
-        if(!matched || !tokenFound){
-            throw new Error("Unexpected character in input: "+source);
+        if(!matched){
+            throw new Error(
+                `Unexpected token or character at line ${currentLine}, column ${currentColumn}; "${source[0]}"`
+            );
         }
-
     }
     return tokens;
+}
+
+//Stanalone test
+const source = `
+let x: string = 'hello';
+const PI: number = 3.14;
+`;
+if (import.meta.main) {
+    console.log("Source Code: ", source);
+    console.log("Tokens: ", tokenize(source));
 };
