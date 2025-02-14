@@ -1,5 +1,5 @@
 //vartual machine
-import { compileToAssembly } from "../jit/jit.ts";
+import { compileToAssembly as _compileToAssembly } from "../jit/jit.ts";
 
 // the stub simualtion the JIT execution flow
 // might allocate executable memory and load machine code
