@@ -56,10 +56,10 @@ export function parse(source:string):ASTNode[]{
             (value.type !== "Literal_STRING" && value.type !== "LITERAL_NUMBER" && value.type !== "LITERAL_BOOLEAN") ||
             semicolon.type !== "SEMICOLON" 
         ){
-            throw new Error("Syntax error in variable declaration");
+            console.log("Syntax error in variable declaration"/*, keyowrd, identifier, colon, dataType, assign, value, semicolon*/);
         }
     
-        let parseValue: string | number | boolean;
+        let parseValue: string | number | boolean = "";
         
         if (value.type === "Literal_STRING"){
             parseValue = value.value.slice(1,-1);
@@ -68,7 +68,7 @@ export function parse(source:string):ASTNode[]{
         } else if (value.type === "LITERAL_BOOLEAN"){
             parseValue = value.value.toLocaleLowerCase() === ("true") ? true : false;
         } else { 
-            throw new Error("Invalid value type");
+            console.log(`Invalid value type: ${value.type}`);
         }
 
         const node:VariableDecarationNode={
