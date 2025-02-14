@@ -8,4 +8,4 @@ export function executeAssembly(assemblyCode: string): void {
     console.log("Executing assembly code:\n", assemblyCode);
 
     // Integration with WASM or DENO FFI
-    }
+    };
