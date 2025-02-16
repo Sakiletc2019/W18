@@ -157,8 +157,11 @@ export function tokenize(sourceCode: string): Token[]{
     return tokens;
 }
 
-//test the lexer
-const sourceCode = await Deno.readTextFile("code.txt");
-for (const token of tokenize(sourceCode)) {
-    console.log(token);
+
+//standalone test
+if (import.meta.main) {
+    const sourceCode = await Deno.readTextFile("code.txt");
+    for (const token of tokenize(sourceCode)) {
+        console.log(token);
+    }
 }
