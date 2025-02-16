@@ -12,26 +12,11 @@ export function parse(source:string):ASTNode[]{
         return tokens[index++];
     }
 
-<<<<<<< HEAD
-    const [keyowrd, identifier,colon,dataType,assign, value] = tokens;
-    if (keyowrd.type !== "KEYWORD" || identifier.type !== "IDENTIFIER" || colon.type !== "COLON" || dataType.type !== "TYPE" || assign.type !== "ASSIGN" || (value.type !== "Literal STRING" && value.type !== "LITERAL NUMBER" && value.type !== "LITERAL BOOLEAN")){
-        throw Error("Syntax error in variable declaration");
-    };
-
-    const node:VariableDecarationNode={
-        type: "VariableDeclaration",
-        kind: keyowrd.value as "let" | "const" | "var",
-        id: identifier.value,
-        datatype: dataType.value as "string" | "number" | "boolean",
-        value: value.value //| value.value =="STRING"? value.value.slice(1,-1): parseFloat(value.value)
-    };
-=======
     function peek():_Token|null{
         return index<tokens.length ? tokens[index]: null;
     }   
 
     while(index < tokens.length){
->>>>>>> 2a827e59e9fb421c52d2c154308349a9d2b0a7e8
 
         while(peek() && (peek()?.type === "WHITESPACE" || peek()?.type === "NEWLINE" || peek()?.type === "COMMENT")){
             consume();
