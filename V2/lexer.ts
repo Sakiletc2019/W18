@@ -37,7 +37,13 @@ export enum TokenType {
     NUMBER = "NUMBER", // 0-9
     BINARY_OPERATOR = "BINARY_OPERATOR", // +, -, *, /, %
     DELIMITER = "DELIMITER", // ;
+    CONSOLE = "CONSOLE", // console
+}
 
+const enum KeywordType {
+    LET = "let",
+    CONST = "const",
+    VAR = "var",
 }
 
 //define token for lexer to parse the source code into tokens 
@@ -46,60 +52,113 @@ export interface Token{
     type: TokenType;
 }
 
+
+function _isSkipChar(src: string): boolean{
+    return /^\s+$/.test(src);
+}
+
+function token(value = "", type: TokenType):Token{
+    return {value, type};
+}
+
+const KEYWORD: Record<string, KeywordType> = {
+    "let": KeywordType.LET,
+};
+
+function _isalpha(src: string): boolean{
+    return /^[a-zA-Z]+$/.test(src);
+}
+
+function _isdigit(src: string): boolean{
+    return /^[0-9]+$/.test(src);
+}
+
+
+function _isboolean(src: string): boolean{
+    return /^(true|false)$/.test(src);
+}
+
+function _isdelimiter(src: string): boolean{
+    return /^;/.test(src);
+}
+
+function _isbinaryoperator(src: string): boolean{
+    return /^(\+|\-|\*|\/)$/.test(src);
+}
+
+function _isdatype(src: string): boolean{
+    return /^(number|string|boolean|any|unknown)$/.test(src);
+}
+
+function _isassignmentoperator(src: string): boolean{
+    return /^=$/.test(src);
+}
+
+function _isbracket(src: string): boolean{
+    return /^(\[|\]|\{|\}|\(|\))$/.test(src);
+}
+
+function _isConsole(src: string): boolean{
+    return /^console.log$/.test(src);
+}
+
+
 // define the lexer function
 export function tokenize(sourceCode: string): Token[]{
     const tokens = new Array<Token>();
-    const src = sourceCode.split(" ");
+    const src = sourceCode.split(/(\s+|;|\(|\)|\{|\}|\[|\])/).filter(token => token.trim().length > 0);
 
     while(src.length > 0){
-        const token = src.shift();
-        if (token !== undefined) {
-            if(token === "let" || token === "const" || token === "var"){
-                tokens.push({value: token, type: TokenType.KEYWORD});
-            }else if(token === ":"){
-                tokens.push({value: token, type: TokenType.PUNCTUATION});
-            }else if(token === "number" || token === "string" || token === "boolean" || token === "any" || token === "unknown" || token === "CustomType"){
-                tokens.push({value: token, type: TokenType.TYPE_ANNOTATION});
-            }else if(token === "="){
-                tokens.push({value: token, type: TokenType.ASSIGNMENT_OPERATOR});
+        const tokenValue = src.shift() as string;
+
+        if(_isSkipChar(tokenValue)){
+            continue;
         }
-        else if(token === "("){
-            tokens.push({value: token, type: TokenType.OpenParenthesis});
-        }else if(token === ")"){
-            tokens.push({value: token, type: TokenType.CloseParenthesis});
-        }else if(token === "{"){
-            tokens.push({value: token, type: TokenType.OpenCurlyBraces});
-        }else if(token === "}"){
-            tokens.push({value: token, type: TokenType.CloseCurlyBraces});
-        }else if(token === "["){
-            tokens.push({value: token, type: TokenType.OpenBracket});
-        }else if(token === "]"){
-            tokens.push({value: token, type: TokenType.CloseBracket});
-        }else if(token === ";"){
-            tokens.push({value: token, type: TokenType.DELIMITER});
-        }else if(token === "+"){
-            tokens.push({value: token, type: TokenType.BINARY_OPERATOR});
-        }else if(token === "-"){
-            tokens.push({value: token, type: TokenType.BINARY_OPERATOR});
-        }else if(token === "*"){
-            tokens.push({value: token, type: TokenType.BINARY_OPERATOR});
-        }   else if(token === "/"){
-            tokens.push({value: token, type: TokenType.BINARY_OPERATOR});
-        }else if(token === "%"){
-            tokens.push({value: token, type: TokenType.BINARY_OPERATOR});
-        }else if(!isNaN(parseFloat(token))){
-            tokens.push({value: token, type: TokenType.NUMBER});
+
+        if(KEYWORD[tokenValue]){
+            tokens.push(token(tokenValue, TokenType.KEYWORD));
+        }else if(_isdatype(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.TYPE_ANNOTATION));
+        }else if(_isalpha(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.IDENTIFIER));
+        }else if(_isassignmentoperator(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.ASSIGNMENT_OPERATOR));
+        }else if(_isbinaryoperator(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.BINARY_OPERATOR));
+        }else if(_isdigit(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.NUMBER));
+        }else if(tokenValue == ":"){
+            tokens.push(token(tokenValue, TokenType.PUNCTUATION));
+        }else if(_isbracket(tokenValue)){
+            if (tokenValue === "(") {
+                tokens.push(token(tokenValue, TokenType.OpenParenthesis));
+            } else if (tokenValue === ")") {
+                tokens.push(token(tokenValue, TokenType.CloseParenthesis));
+            } else if (tokenValue === "{") {
+                tokens.push(token(tokenValue, TokenType.OpenCurlyBraces));
+            } else if (tokenValue === "}") {
+                tokens.push(token(tokenValue, TokenType.CloseCurlyBraces));
+            } else if (tokenValue === "[") {
+                tokens.push(token(tokenValue, TokenType.OpenBracket));
+            } else if (tokenValue === "]") {
+                tokens.push(token(tokenValue, TokenType.CloseBracket));
+            }
+        }else if(_isboolean(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.TYPE_ANNOTATION));
+        }else if(_isConsole(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.CONSOLE));
+        }else if(_isdelimiter(tokenValue)){
+            tokens.push(token(tokenValue, TokenType.DELIMITER));
         }else{
-            tokens.push({value: token, type: TokenType.IDENTIFIER});
+            console.error(`\x1b[31mUnexpected token: ${tokenValue}\x1b[0m`);
         }
-    }
     }
 
     return tokens;
 }
 
-if(import.meta.main){
-    const sourceCode = `let x : number = 10 + 5;`;
-    const tokens = tokenize(sourceCode);
-    console.log(tokens);
+//test the lexer
+const sourceCode = await Deno.readTextFile("code.txt");
+for (const token of tokenize(sourceCode)) {
+    console.log(token);
 }
