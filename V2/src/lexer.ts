@@ -46,27 +46,42 @@ const enum KeywordType {
     VAR = "var",
 }
 
+export enum DataType {
+    NUMBER = "number",
+    STRING = "string",
+    BOOLEAN = "boolean",
+    ANY = "any",
+    UNKNOWN = "unknown",
+}
+
 //define token for lexer to parse the source code into tokens 
 export interface Token{
     value: string;
-    type: TokenType;
+    type: TokenType | KeywordType | DataType;
 }
 
+function _isFunction(src: string): boolean{
+    return /^function$/.test(src);
+}
 
 function _isSkipChar(src: string): boolean{
     return /^\s+$/.test(src);
 }
 
-function token(value = "", type: TokenType):Token{
+function token(value = "", type: TokenType | KeywordType | DataType):Token{
     return {value, type};
 }
 
-const KEYWORD: Record<string, KeywordType> = {
-    "let": KeywordType.LET,
-};
+// const _KEYWORD: Record<string, KeywordType> = {
+//     "let": KeywordType.LET,
+// };
+
+function _isKeyword(src: string): boolean{
+    return /^(let|const|var)$/.test(src);
+}
 
 function _isalpha(src: string): boolean{
-    return /^[a-zA-Z]+$/.test(src);
+    return /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(src) && !/^(number|string|boolean|any|unknown)$/.test(src);
 }
 
 function _isdigit(src: string): boolean{
@@ -115,10 +130,16 @@ export function tokenize(sourceCode: string): Token[]{
             continue;
         }
 
-        if(KEYWORD[tokenValue]){
+        if(_isKeyword(tokenValue)){
+            if (tokenValue === "let") {
+                tokens.push(token(tokenValue, KeywordType.LET));
+            } else if (tokenValue === "const") {
+                tokens.push(token(tokenValue, KeywordType.CONST));
+            } else if (tokenValue === "var") {
+                tokens.push(token(tokenValue, KeywordType.VAR));
+            }
+        }else if(_isFunction(tokenValue)){
             tokens.push(token(tokenValue, TokenType.KEYWORD));
-        }else if(_isdatype(tokenValue)){
-            tokens.push(token(tokenValue, TokenType.TYPE_ANNOTATION));
         }else if(_isalpha(tokenValue)){
             tokens.push(token(tokenValue, TokenType.IDENTIFIER));
         }else if(_isassignmentoperator(tokenValue)){
@@ -129,6 +150,20 @@ export function tokenize(sourceCode: string): Token[]{
             tokens.push(token(tokenValue, TokenType.NUMBER));
         }else if(tokenValue == ":"){
             tokens.push(token(tokenValue, TokenType.PUNCTUATION));
+        }else if(_isdatype(tokenValue)){
+            if (tokenValue === "number") {
+                tokens.push(token(tokenValue, DataType.NUMBER));
+            } else if (tokenValue === "string") {
+                tokens.push(token(tokenValue, DataType.STRING));
+            } else if (tokenValue === "boolean") {
+                tokens.push(token(tokenValue, DataType.BOOLEAN));
+            } else if (tokenValue === "any") {
+                tokens.push(token(tokenValue, DataType.ANY));
+            } else if (tokenValue === "unknown") {
+                tokens.push(token(tokenValue, DataType.UNKNOWN));
+            } else{
+                tokens.push(token(tokenValue, TokenType.TYPE_ANNOTATION));
+            }
         }else if(_isbracket(tokenValue)){
             if (tokenValue === "(") {
                 tokens.push(token(tokenValue, TokenType.OpenParenthesis));
