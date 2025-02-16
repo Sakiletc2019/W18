@@ -1,4 +1,4 @@
-import { parse } from "../src/parser/parser.ts";
+import { parse } from "./parser/parser.ts";
 
 async function main() {
     if (Deno.args.length === 0) {

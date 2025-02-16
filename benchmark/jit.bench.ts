@@ -1,6 +1,6 @@
-import { compileToAssembly } from "../src/jit/jit.ts";
-import { generateBytecode } from "../src/bytecode/bytecode.ts";
-import { parse } from "../src/parser/parser.ts";
+import { compileToAssembly } from "../V1/src/jit/jit.ts";
+import { generateBytecode } from "../V1/src/bytecode/bytecode.ts";
+import { parse } from "../V1/src/parser/parser.ts";
 
 const sourceCode = `let AST: string = "is tree";`;
 
