@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "ast": "./V2/srcast.ts",
+    "lexer": "./V2/src/lexer.ts",
+    "parser": "./V2/src/parser.ts"
+  }
+}

@@ -90,7 +90,8 @@ export default class Parser {
                 return LocalTokenType.Identifier;
             // Add other cases as needed...
             default:
-                throw new Error(`Unexpected token type: ${type}`);
+                console.log(`Unexpected token type: ${type}`);
+                return LocalTokenType.EOF; // Return a default value
         }
     }
 
