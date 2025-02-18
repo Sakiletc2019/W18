@@ -1,0 +1,38 @@
+{
+    // Deno configuration for the W18 TypeScript Execution Engine
+    "compilerOptions": {
+      // Enable strict mode to enforce more type checking during compilation
+      "strict": true,
+      // Enable module resolution to make sure the modules are imported correctly
+      // Define the output module format as ES modules (for compatibility with modern JavaScript)
+    },
+  
+    // Permissions that Deno needs to execute this code
+    "permissions": {
+      // Allow read access to the file system (for reading the TypeScript files)
+      "read": true,
+      // Allow write access to the file system (if you need to write outputs or cache files)
+      "write": true,
+      // Allow network access if you need to make HTTP requests or load external modules
+      "net": true
+    },
+  
+    // You can also include "imports" if you need to pin specific versions of remote modules
+    "importMap": "import_map.json",
+  
+    // Configuration for Deno's module resolution
+    "lint": {
+      "rules": {
+        "tags": ["recommended"]
+      }
+    },
+  
+    // Specify which files are the entry points
+    "files": [
+      "V2/src/index.ts"
+    ],
+  
+    // Enables the caching of modules
+    "cache": true
+  }
+  

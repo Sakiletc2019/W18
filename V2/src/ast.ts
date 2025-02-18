@@ -1,13 +1,14 @@
-export type NodeType = 
-| "VariableDeclaration"
-| "FunctionDeclaration"
-| "Assignment"
-| "BinaryExpression"
-| "UnaryExpression"
-| "Identifier"
-| "Literal"
-| "BlockStatement"
-| "Program";
+export enum NodeType {
+    VariableDeclaration = "VariableDeclaration",
+    FunctionDeclaration = "FunctionDeclaration",
+    Assignment = "Assignment",
+    BinaryExpression = "BinaryExpression",
+    UnaryExpression = "UnaryExpression",
+    Identifier = "Identifier",
+    Literal = "Literal",
+    BlockStatement = "BlockStatement",
+    Program = "Program"
+}
 
 export interface statement{
     type: NodeType;
@@ -69,3 +70,6 @@ export interface BlockStatement extends statement{
     kind: "BlockStatement";
     body: statement[];
 }
+
+// Example usage and test code
+//export { NodeType, statement, Program, Expration, VariableDeclaration, FunctionDeclaration, Assignment, BinaryExpression, UnaryExpression, Identifier, Literal, BlockStatement };

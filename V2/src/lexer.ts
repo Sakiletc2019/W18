@@ -38,9 +38,10 @@ export enum TokenType {
     BINARY_OPERATOR = "BINARY_OPERATOR", // +, -, *, /, %
     DELIMITER = "DELIMITER", // ;
     CONSOLE = "CONSOLE", // console
+    EOF = "EOF",
 }
 
-const enum KeywordType {
+export enum KeywordType {
     LET = "let",
     CONST = "const",
     VAR = "var",
@@ -194,9 +195,10 @@ export function tokenize(sourceCode: string): Token[]{
 
 
 //standalone test
-if (import.meta.main) {
-    const sourceCode = await Deno.readTextFile("code.txt");
-    for (const token of tokenize(sourceCode)) {
-        console.log(token);
-    }
-}
+// if (import.meta.main) {
+//     const sourceCode = await Deno.readTextFile("code.txt");
+//     for (const token of tokenize(sourceCode)) {
+//         console.log(token);
+//     }
+// }
+
