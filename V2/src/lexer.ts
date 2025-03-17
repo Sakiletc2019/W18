@@ -202,3 +202,10 @@ export function tokenize(sourceCode: string): Token[]{
 //     }
 // }
 
+let num1:number=5;
+console.log("num1: ", num1);
+let num2:number=10;
+console.log("num2: ", num2);
+let sum:number=num1+num2;
+console.log("sum: ", sum);
+
