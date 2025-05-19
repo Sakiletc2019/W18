@@ -3,25 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="W18 TypeScript Execution Engine - A powerful tool for parsing and executing TypeScript code, now integrating with Chromium for seamless browser support.  Last updated on May 18, 2025.">
-    <meta name="keywords" content="TypeScript, Execution Engine, W18, Parser, Tokenizer, AST, Chromium, Browser Integration, Deno, TypeScript Engine">
+    <meta name="description" content="W18 TypeScript Execution Engine - Run TypeScript natively in browsers. Open source, fast, and ready for the future.">
+    <meta name="keywords" content="TypeScript, Execution Engine, W18, Chromium, Open Source, Browser, Developer, Students">
     <meta name="author" content="Sakil Akhtar">
     <meta property="og:url" content="https://github.com/Sakiletc2019/W18">
     <meta property="og:title" content="W18 TypeScript Execution Engine">
-    <meta property="og:description" content="W18 TypeScript Execution Engine - A powerful tool for parsing and executing TypeScript code, now integrating with Chromium for seamless browser support.">
-    
+    <meta property="og:description" content="W18 TypeScript Execution Engine - Run TypeScript natively in browsers. Open source, fast, and ready for the future.">
     <title>W18 TypeScript Execution Engine</title>
+    <link rel="stylesheet" href="style.css" />
+    
 </head>
 <body>
-    <h1>W18 TypeScript Execution Engine</h1>
-    <p>Welcome to the W18 TypeScript Execution Engine project. This tool is designed to parse and execute TypeScript code efficiently.</p>
-    <p>We are excited to announce that the W18 engine is being integrated with Chromium to support TypeScript code directly in browsers. Developers will soon be able to use <code>&lt;script type="ts"&gt;</code> and <code>&lt;script type="typescript"&gt;</code> tags to run TypeScript code seamlessly.</p>
-    <p>This integration will allow the HTML parser to auto-detect TypeScript code and execute it using the W18 engine, solving challenges for developers who prefer working with TypeScript.</p>
-    <p>The W18 engine, written in TypeScript and tested with the Deno 2.0 runtime environment, has been rewritten in C++ for Chromium integration. It has been tested in its primary stage with Chromium and works properly. Stay tuned for updates as we continue development!</p>
-    <p>We are currently developing an HTML parser for Chromium that can auto-detect TypeScript code and execute it using the W18 engine. This will allow developers to write TypeScript code directly in `&lt;script &gt;` tags and have it executed seamlessly in the browser.</p>
-    <p><strong>Note:</strong> This repository and the information on this page were last updated on May 18, 2025, at 2 PM (Standard Time).</p>
-    <p>Developed by <strong>Sakil Akhtar</strong>.</p>
-    <p><em>Chromium-integrated W18 engine launch coming soon on GitHub for developers! Stay tuned for more updates.</em></p>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo-w18" aria-label="W18 Logo">
+            <span class="w">W</span><span class="oneeight">18</span>
+        </div>
+        <span class="nav-title">TypeScript Execution Engine</span>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+    <div class="hero-logo">
+        <img src="image.png" alt="W18 Logo" />
+    </div>
+    <div class="hero-text">
+        <h1>Run TypeScript Natively in Your Browser</h1>
+        <p>
+            <strong>W18</strong> is an open source TypeScript execution engine designed for seamless browser integration.<br><br>
+            Experience fast, secure, and modern TypeScript execution—no build step, no plugins, just pure code.<br>
+        </p>
+        <div class="hero-actions">
+            <a href="https://github.com/Sakiletc2019/W18" target="_blank" class="github-cta">
+                <svg height="22" width="22" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:middle;margin-right:8px;">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                    0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+                    -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2
+                    -3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64
+                    -.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08
+                    2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                    1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                View Source Code
+            </a>
+            <a href="https://github.com/Sakiletc2019/W18/wiki" target="_blank" class="github-cta">
+                <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:middle;margin-right:7px;">
+                    <path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"></path>
+                </svg>
+                Read More on GitHub Wiki
+            </a>
+        </div>
+    </div>
+</section>
+
+    <!-- Uses & Features Section -->
+    <div class="section-row">
+        <div class="section-box">
+            <h2>🚀 Uses & Features</h2>
+            <ul>
+                <li>Run TypeScript directly in Chromium-based browsers</li>
+                <li>Zero-config integration for web projects</li>
+                <li>Supports modern TypeScript syntax and features</li>
+                <li>Open source and extensible for all developers</li>
+                <li>Fast parsing and execution with minimal overhead</li>
+            </ul>
+        </div>
+        <div class="section-box">
+            <h2>🎯 Goals & Usability</h2>
+            <ul>
+                <li>Empower developers to use TypeScript natively in HTML</li>
+                <li>Enable rapid prototyping and learning for students</li>
+                <li>Provide robust APIs for enterprise and open source</li>
+                <li>Seamless integration with browser developer tools</li>
+                <li>Accessible, documented, and community-driven</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Issues & Roadmap Section -->
+    <div class="section-row">
+        <div class="section-box">
+            <h2>🐞 Issues & Feedback</h2>
+            <ul>
+                <li>Track and report issues on <a href="https://github.com/Sakiletc2019/W18/issues" target="_blank" style="color:var(--accent);">GitHub Issues</a></li>
+                <li>Community-driven bug fixes and enhancements</li>
+                <li>Transparent development and open discussions</li>
+                <li>Continuous integration and automated testing</li>
+            </ul>
+        </div>
+        <div class="section-box">
+            <h2>🌟 Usability Highlights</h2>
+            <ul>
+                <li>Simple <span style="color:var(--accent);font-weight:600;">&lt;script type="ts"&gt;</span> support in HTML</li>
+                <li>Works out-of-the-box in supported browsers</li>
+                <li>Minimal learning curve for TypeScript users</li>
+                <li>Optimized for both desktop and mobile experiences</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- GitHub Info Section -->
+    <section class="github-info" id="github-info" style="background:#161b22;border:1px solid #30363d;border-radius:10px;box-shadow:0 2px 8px rgba(30,41,59,0.10);color:#fff;max-width:600px;margin:2.5rem auto 2rem auto;padding:2rem 1.5rem;">
+    <h2 style="background:#21262d;padding:0.5rem 1rem;border-radius:6px;color:#1e90ff;font-size:1.2rem;margin:0 0 0.7rem 0;">
+        GitHub Repository
+    </h2>
+    <p style="margin:0.5rem 0;font-size:1.1rem;">
+        <a href="https://github.com/Sakiletc2019/W18" target="_blank" style="color:#58a6ff;font-weight:bold;display:inline-flex;align-items:center;text-decoration:none;">
+            <svg height="22" width="22" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:middle;margin-right:8px;">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52
+                -.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2
+                -3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64
+                -.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08
+                2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+                1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            View on GitHub
+        </a>
+    </p>
+</section>
+
+    <footer>
+    <div class="footer-logo">
+        <span class="w">W</span><span class="oneeight">18</span>
+    </div>
+    <ul class="footer-sitemap">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#github-info">GitHub</a></li>
+        <li><a href="#future">Future</a></li>
+        <li><a href="https://github.com/Sakiletc2019/W18/issues" target="_blank">Issues</a></li>
+    </ul>
+    <div class="footer-license">
+        Licensed under the <a href="https://github.com/Sakiletc2019/W18/blob/main/LICENSE" target="_blank" style="color:#fff;text-decoration:underline;">MIT License</a> &mdash; &copy; 2025 Sakil Akhtar
+    </div>
+</footer>
+    
 </body>
 </html>
 
