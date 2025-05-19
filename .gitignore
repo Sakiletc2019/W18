@@ -2,6 +2,3 @@ pipeline
 .vscode
 
 # src/parser/test.ts
-
-.root/node_modules/
-.root/database/db.json
